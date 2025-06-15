@@ -9,7 +9,7 @@ This repository contains two web-based projects:
 ## 👨‍💻 Group Members
 
 - **Subhadip Medya**
-- **[Add other group members here]**
+
 
 ---
 
