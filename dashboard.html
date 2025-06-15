@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>User Dashboard</title>
+  
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+  
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css" rel="stylesheet">
+  
+  <style>
+    body {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .dashboard-container {
+      margin-top: 5rem;
+      margin-bottom: 5rem;
+    }
+
+    .container-custom {
+      margin-bottom: 40px;
+      padding: 40px;
+      border: none;
+      border-radius: 15px;
+      background: linear-gradient(145deg, #b4e275, #a8d968);
+      box-shadow: 
+        0 10px 30px rgba(0,0,0,0.2),
+        inset 0 1px 0 rgba(255,255,255,0.3);
+      max-width: 450px;
+      margin-left: auto;
+      margin-right: auto;
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .container-custom::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
+      border-radius: 15px 15px 0 0;
+    }
+
+    .dashboard-title {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #2c3e50;
+      font-weight: 700;
+      font-size: 2.2rem;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .dashboard-subtitle {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      color: #34495e;
+      font-size: 1rem;
+      opacity: 0.8;
+    }
+
+    .dashboard-options {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-width: 100%;
+    }
+
+    .dashboard-btn {
+      padding: 15px 20px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      text-transform: none;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .dashboard-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .dashboard-btn:hover::before {
+      left: 100%;
+    }
+
+    .dashboard-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+
+    .btn-update {
+      background: linear-gradient(135deg, #3498db, #2980b9);
+      color: white;
+      box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+    }
+
+    .btn-update:hover {
+      background: linear-gradient(135deg, #2980b9, #1f5582);
+      color: white;
+      box-shadow: 0 8px 25px rgba(52, 152, 219, 0.4);
+    }
+
+    .btn-delete {
+      background: linear-gradient(135deg, #e74c3c, #c0392b);
+      color: white;
+      box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+    }
+
+    .btn-delete:hover {
+      background: linear-gradient(135deg, #c0392b, #a93226);
+      color: white;
+      box-shadow: 0 8px 25px rgba(231, 76, 60, 0.4);
+    }
+
+    .btn-link {
+      background: linear-gradient(135deg, #9b59b6, #8e44ad);
+      color: white;
+      box-shadow: 0 4px 15px rgba(155, 89, 182, 0.3);
+    }
+
+    .btn-link:hover {
+      background: linear-gradient(135deg, #8e44ad, #7d3c98);
+      color: white;
+      box-shadow: 0 8px 25px rgba(155, 89, 182, 0.4);
+    }
+
+    .btn-signout {
+      background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+      color: white;
+      box-shadow: 0 4px 15px rgba(149, 165, 166, 0.3);
+    }
+
+    .btn-signout:hover {
+      background: linear-gradient(135deg, #7f8c8d, #6c7b7d);
+      color: white;
+      box-shadow: 0 8px 25px rgba(149, 165, 166, 0.4);
+    }
+
+    .user-info {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      padding: 15px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+
+    .user-email {
+      color: #2c3e50;
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin: 0;
+    }
+
+    @media (max-width: 576px) {
+      .container-custom {
+        margin: 20px;
+        padding: 30px 20px;
+        max-width: none;
+      }
+      
+      .dashboard-title {
+        font-size: 1.8rem;
+      }
+      
+      .dashboard-btn {
+        font-size: 1rem;
+        padding: 12px 15px;
+      }
+    }
+
+    /* Animation for page load */
+    .container-custom {
+      animation: slideInUp 0.6s ease-out;
+    }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    
+    .btn-delete {
+      animation: pulse-red 2s infinite;
+    }
+
+    @keyframes pulse-red {
+      0% {
+        box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+      }
+      50% {
+        box-shadow: 0 4px 20px rgba(231, 76, 60, 0.5);
+      }
+      100% {
+        box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container dashboard-container">
+    <div class="container-custom">
+      <h1 class="dashboard-title">
+        <i class="bi bi-speedometer2"></i>
+        Dashboard
+      </h1>
+      <p class="dashboard-subtitle">Manage your account and preferences</p>
+      
+      <div class="user-info" id="user-info" style="display: none;">
+        <p class="user-email" id="user-email-display"></p>
+      </div>
+
+      <div class="dashboard-options">
+        <button class="btn dashboard-btn btn-update" id="update-profile-btn">
+          <i class="bi bi-person-gear"></i>
+          Update My Profile
+        </button>
+        
+        <button class="btn dashboard-btn btn-link" id="set-unique-link-btn">
+          <i class="bi bi-link-45deg"></i>
+          Set Unique Profile Link
+        </button>
+        
+        <button class="btn dashboard-btn btn-signout" id="sign-out-btn">
+          <i class="bi bi-box-arrow-right"></i>
+          Sign Out
+        </button>
+        
+        <button class="btn dashboard-btn btn-delete" id="delete-account-btn">
+          <i class="bi bi-trash3"></i>
+          Delete Account
+        </button>
+      </div>
+    </div>
+  </div>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+  
+  <script>
+    
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+    
+    const email = getQueryParam('email');
+    if (!email) {
+      
+      showAlert('No user email found. Please login again.', 'danger');
+      setTimeout(() => {
+        window.location.href = '../login/login.html';
+      }, 3000);
+    } else {
+      
+      document.getElementById('user-email-display').textContent = `Welcome, ${email}`;
+      document.getElementById('user-info').style.display = 'block';
+    }
+
+    
+    function showAlert(message, type = 'info') {
+      const alertHTML = `
+        <div class="alert alert-${type} alert-dismissible fade show position-fixed" 
+             style="top: 20px; right: 20px; z-index: 9999; min-width: 300px;" role="alert">
+          ${message}
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+      `;
+      document.body.insertAdjacentHTML('beforeend', alertHTML);
+      
+      
+      setTimeout(() => {
+        const alert = document.querySelector('.alert');
+        if (alert) {
+          const bsAlert = new bootstrap.Alert(alert);
+          bsAlert.close();
+        }
+      }, 5000);
+    }
+
+    document.getElementById('update-profile-btn').addEventListener('click', () => {
+      window.location.href = `profile.html?email=${encodeURIComponent(email)}`;
+    });
+
+    document.getElementById('delete-account-btn').addEventListener('click', () => {
+      
+      const confirmModal = `
+        <div class="modal fade" id="deleteModal" tabindex="-1">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title">
+                  <i class="bi bi-exclamation-triangle"></i>
+                  Confirm Account Deletion
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+              </div>
+              <div class="modal-body">
+                <p><strong>Warning:</strong> This action cannot be undone!</p>
+                <p>Are you absolutely sure you want to delete your account? All your data will be permanently removed.</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" id="confirmDelete">
+                  <i class="bi bi-trash3"></i>
+                  Delete My Account
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      
+      document.body.insertAdjacentHTML('beforeend', confirmModal);
+      const modal = new bootstrap.Modal(document.getElementById('deleteModal'));
+      modal.show();
+      
+      document.getElementById('confirmDelete').addEventListener('click', () => {
+        modal.hide();
+        
+        // Show loading state
+        const deleteBtn = document.getElementById('delete-account-btn');
+        const originalText = deleteBtn.innerHTML;
+        deleteBtn.innerHTML = '<i class="spinner-border spinner-border-sm"></i> Deleting...';
+        deleteBtn.disabled = true;
+        
+        fetch(`delete_account.php?email=${encodeURIComponent(email)}`, { method: 'POST' })
+          .then(response => response.text())
+          .then(data => {
+            showAlert(data, 'success');
+            setTimeout(() => {
+              window.location.href = '../login/login.html';
+            }, 2000);
+          })
+          .catch(err => {
+            showAlert('Error deleting account. Please try again.', 'danger');
+            deleteBtn.innerHTML = originalText;
+            deleteBtn.disabled = false;
+          });
+      });
+      
+      
+      document.getElementById('deleteModal').addEventListener('hidden.bs.modal', function() {
+        this.remove();
+      });
+    });
+
+    document.getElementById('set-unique-link-btn').addEventListener('click', () => {
+      window.location.href = `set_unique_link.html?email=${encodeURIComponent(email)}`;
+    });
+
+    document.getElementById('sign-out-btn').addEventListener('click', () => {
+      showAlert('Signing out...', 'info');
+      setTimeout(() => {
+        window.location.href = '../login/login.html';
+      }, 1000);
+    });
+
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      
+      const buttons = document.querySelectorAll('.dashboard-btn');
+      buttons.forEach((btn, index) => {
+        btn.style.opacity = '0';
+        btn.style.transform = 'translateX(-20px)';
+        setTimeout(() => {
+          btn.style.transition = 'all 0.4s ease';
+          btn.style.opacity = '1';
+          btn.style.transform = 'translateX(0)';
+        }, index * 100 + 300);
+      });
+    });
+  </script>
+</body>
+</html>

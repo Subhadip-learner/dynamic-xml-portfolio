@@ -1,0 +1,138 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f5f7fa;
+}
+
+.top-left-header {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  height: 60px;
+  z-index: 1000;
+  justify-content: flex-start;
+}
+
+.top-left-header .logo {
+  height: 40px;
+  margin-right: 10px;
+}
+
+.header-text {
+  font-size: 24px;
+  font-weight: bold;
+  color: #0a66c2; 
+}
+
+.signup-container {
+  max-width: 400px;
+  margin: 80px auto 40px;
+  background-color: #fff;
+  padding: 30px 25px 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.signup-container h1 {
+  margin-bottom: 25px;
+  font-weight: 700;
+  color: #222;
+}
+
+.signup-container form {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.signup-container label {
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #555;
+}
+
+.signup-container input[type="text"],
+.signup-container input[type="email"],
+.signup-container input[type="password"] {
+  padding: 10px 12px;
+  margin-bottom: 18px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 15px;
+}
+
+.signup-container button[type="submit"] {
+  background-color: #0073e6;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.signup-container button[type="submit"]:hover {
+  background-color: #005bb5;
+}
+
+.social-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.social-button {
+  flex: 1;
+  margin: 0 5px;
+  padding: 10px 0;
+  border-radius: 5px;
+  font-weight: 600;
+  cursor: pointer;
+  color: white;
+  border: none;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.social-button.google {
+  background-color: #db4437;
+}
+
+.social-button.apple {
+  background-color: #333;
+}
+
+.social-button svg {
+  margin-right: 8px;
+  height: 18px;
+  width: 18px;
+}
+
+.login-redirect {
+  margin-top: 10px;
+}
+
+.login-redirect button {
+  background: none;
+  border: none;
+  color: #0073e6;
+  cursor: pointer;
+  font-size: 14px;
+  text-decoration: underline;
+  padding: 0;
+}
+
+.login-redirect button:hover {
+  color: #1072d4;
+}

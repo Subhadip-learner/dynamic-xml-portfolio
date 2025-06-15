@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<users>
+  <user>
+    <email>user1@example.com</email>
+    <password>password123</password>
+  </user>
+  <user>
+    <email>user2@example.com</email>
+    <password>mypassword</password>
+  </user>
+<user><username>rakesh</username><email>rakesh@example.com</email><password>rakesh1234</password><contact><phone>1234567890</phone><whatsapp>0123456789</whatsapp></contact><address>op house birla grand canyon</address><aboutme>about myself</aboutme><skills><skill><name>c</name><proficiencylevel>100</proficiencylevel></skill><skill><name>java</name><proficiencylevel>12</proficiencylevel></skill></skills><projects><project><projectname>portfolio</projectname><project_description>webdev</project_description><projectzip>data/projectZip/Group05_Assign3.1.zip</projectzip><projectimages><image>data/images/vlcsnap-2024-08-04-09h18m46s888.png</image><image>data/images/Screenshot_2024-06-11_175628.png</image></projectimages><technologyused><technology>c</technology><technology>me</technology><technology>rn</technology></technologyused></project><project><projectname>to do list</projectname><project_description>appdev</project_description><projectzip>data/projectZip/Group05_Assign1.zip</projectzip><projectimages><image>data/images/Web_Design_Portfolio_Presentation_in_Pink_Purple_Orange_Digitalism_Style.png</image></projectimages><technologyused><technology>kotlin</technology><technology>android</technology></technologyused></project></projects><education_qualification><education><institute>birla house</institute><course>btech</course></education></education_qualification><workexperiences><workexperience><company_name>abc</company_name><role>hr</role><start_year>2022</start_year><end_year>2026</end_year></workexperience></workexperiences><testimonials><testimonial><made_by>Rsc</made_by><statement>Abcd</statement></testimonial></testimonials><certifications><certification>CCNA</certification></certifications><accomplishments><accomplishment>none</accomplishment></accomplishments><sociallinks><Github>xyz.in</Github><linkdn>abc.in</linkdn></sociallinks><photo>data/images/Screenshot 2024-10-25 201800.png</photo></user></users>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Set Unique Link</title>
+  
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet" />
+  
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #fff;
+      padding-top: 4rem;
+    }
+    .container-custom {
+      margin-top: 2rem;
+      margin-bottom: 5rem;
+      padding: 40px;
+      border-radius: 15px;
+      background: linear-gradient(145deg, #b4e275, #a8d968);
+      box-shadow: 
+        0 10px 30px rgba(0,0,0,0.2),
+        inset 0 1px 0 rgba(255,255,255,0.3);
+      max-width: 450px;
+      margin-left: auto;
+      margin-right: auto;
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+      color: #2c3e50;
+    }
+    .container-custom::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
+      border-radius: 15px 15px 0 0;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-weight: 700;
+      font-size: 2.2rem;
+      color: #2c3e50;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    label {
+      font-weight: 600;
+      margin-top: 1rem;
+      display: block;
+      color: #2c3e50;
+    }
+    input[type="text"], input[type="email"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+    button {
+      margin-top: 20px;
+      padding: 12px 20px;
+      width: 100%;
+      font-weight: 700;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #9b59b6, #8e44ad);
+      color: white;
+      box-shadow: 0 4px 15px rgba(155, 89, 182, 0.3);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    button:hover {
+      background: linear-gradient(135deg, #8e44ad, #7d3c98);
+      box-shadow: 0 8px 25px rgba(155, 89, 182, 0.4);
+    }
+    #response {
+      margin-top: 15px;
+      font-weight: 600;
+      text-align: center;
+      color: #2c3e50;
+    }
+  </style>
+</head>
+<body>
+  <div class="container-custom">
+    <h1>Set Your Unique Link</h1>
+    <form id="uniqueLinkForm">
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required placeholder="Enter your email" />
+      
+      <label for="link">Desired Unique Link:</label>
+      <input type="text" id="link" name="link" required placeholder="Enter your desired unique link" />
+      
+      <button type="submit">Set Link</button>
+    </form>
+
+    <div id="response"></div>
+  </div>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+  document.getElementById('uniqueLinkForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const email = document.getElementById('email').value.trim();
+    const link = document.getElementById('link').value.trim();
+
+    if (!email || !link) {
+      document.getElementById('response').textContent = 'Please fill in both fields.';
+      return;
+    }
+
+    fetch('set_unique_link.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email: email, link: link })
+    })
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('response').textContent = data;
+    })
+    .catch(error => {
+      document.getElementById('response').textContent = 'Error: ' + error.message;
+    });
+  });
+  </script>
+</body>
+</html>

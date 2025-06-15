@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PortfolioForge - Craft Your Professional Portfolio</title>
+    
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary-color: #8b5cf6;
+            --accent-color: #06b6d4;
+            --dark-bg: #0f172a;
+            --light-bg: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+        }
+
+        
+        .navbar-custom {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-color) !important;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .navbar-nav .nav-link {
+            font-weight: 500;
+            color: var(--text-dark) !important;
+            margin: 0 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 6rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .btn-custom {
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            border: none;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary-custom {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        .btn-primary-custom:hover {
+            background: var(--light-bg);
+            color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-outline-custom {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-outline-custom:hover {
+            background: white;
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        
+        .features-section {
+            padding: 6rem 0;
+            background: var(--light-bg);
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            height: 100%;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+        }
+
+        
+        .cta-section {
+            background: var(--dark-bg);
+            color: white;
+            padding: 6rem 0;
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .cta-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            margin-bottom: 2rem;
+        }
+
+        /* Footer */
+        .footer-custom {
+            background: #1e293b;
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            margin: 0 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .btn-custom {
+                padding: 0.5rem 1.5rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-delay-1 { animation-delay: 0.2s; }
+        .animate-delay-2 { animation-delay: 0.4s; }
+        .animate-delay-3 { animation-delay: 0.6s; }
+    </style>
+</head>
+<body>
+    
+    <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="/">
+                <img src="../data/images/logo.png" alt="Logo" style="height: 60px; margin-right: 8px;" />
+                PortfolioForge
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Features</a>
+                    </li>
+                    <li class="nav-item">
+<a class="nav-link" href="../SearchBykey/search.html">Portfolio Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="page-b.html">Templates</a>
+                    </li>
+                </ul>
+                
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../login/login.html">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-custom btn-primary-custom ms-2" href="../signup/signup.html">
+                            Sign Up <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    
+    <section class="hero-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <div class="hero-content">
+                        <h1 class="hero-title fade-in">Craft Your Professional Portfolio in Minutes</h1>
+                        <p class="hero-subtitle fade-in animate-delay-1">
+                            PortfolioForge makes it effortless to create a stunning, personalized portfolio website. Choose from beautiful templates, fill in your details, and launch your site.
+                        </p>
+                        <div class="fade-in animate-delay-2">
+                            <a href="../signup/signup.html" class="btn btn-custom btn-primary-custom me-3">
+                                Get Started Free <i class="bi bi-rocket-takeoff"></i>
+                            </a>
+                            <a href="#features" class="btn btn-custom btn-outline-custom">
+                                Learn More <i class="bi bi-arrow-down"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section id="features" class="features-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <span class="badge bg-primary rounded-pill px-3 py-2 mb-3">Key Features</span>
+                    <h2 class="section-title">Everything You Need to Shine Online</h2>
+                    <p class="section-subtitle">
+                        PortfolioForge provides intuitive tools and beautiful designs to showcase your skills and experience professionally.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="feature-card text-center">
+                        <div class="feature-icon mx-auto">
+                            <i class="bi bi-palette"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">Easy Customization</h4>
+                        <p class="text-muted">
+                            Choose from a variety of professionally designed templates and personalize them with your content, colors, and fonts. No coding required.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="feature-card text-center">
+                        <div class="feature-icon mx-auto">
+                            <i class="bi bi-rocket-takeoff"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">One-Click Deployment</h4>
+                        <p class="text-muted">
+                            Publish your portfolio website instantly on our reliable hosting or download the files to host it yourself. Your choice.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="feature-card text-center">
+                        <div class="feature-icon mx-auto">
+                            <i class="bi bi-briefcase"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">Recruiter Ready</h4>
+                        <p class="text-muted">
+                            Optionally make your portfolio visible to potential employers collaborating with PortfolioForge, opening doors to new opportunities.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="cta-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h2 class="cta-title">Ready to Build Your Online Presence?</h2>
+                    <p class="cta-subtitle">
+                        Sign up today and start creating your professional portfolio website for free.
+                    </p>
+                    <div class="d-flex flex-wrap justify-content-center gap-3">
+                        <a href="../signup/signup.html" class="btn btn-custom btn-primary-custom">
+                            Sign Up Now <i class="bi bi-arrow-right"></i>
+                        </a>
+                        <a href="../SearchBykey/search.html" class="btn btn-custom btn-outline-custom">
+                            View Gallery <i class="bi bi-images"></i>
+                        </a>
+                        <a href="page-b.html" class="btn btn-custom btn-outline-custom">
+                            Browse Templates <i class="bi bi-layout-text-window-reverse"></i>
+                        </a>
+                    </div>
+                    <p class="small text-muted mt-3">
+                        <i class="bi bi-shield-check me-1"></i>
+                        Get started in seconds. No credit card required.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-custom">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <a class="navbar-brand d-flex align-items-center" href="/">
+                        <img src="../data/images/logo.png" alt="Logo" style="height: 60px; margin-right: 8px;" />
+                        PortfolioForge
+                        </a>
+                    </div>
+                    <p class="text-muted">
+                        Creating professional portfolios that make you stand out from the crowd.
+                    </p>
+                </div>
+                <div class="col-lg-6 text-lg-end">
+                    <div class="footer-links mb-3">
+                        <a href="terms.html">Terms of Service</a>
+                        <a href="privacy.html">Privacy Policy</a>
+                        <a href="contact.html">Contact</a>
+                        <a href="help.html">Help</a>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" class="text-muted me-3"><i class="bi bi-twitter fs-5"></i></a>
+                        <a href="#" class="text-muted me-3"><i class="bi bi-linkedin fs-5"></i></a>
+                        <a href="#" class="text-muted me-3"><i class="bi bi-github fs-5"></i></a>
+                        <a href="#" class="text-muted"><i class="bi bi-instagram fs-5"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4 border-secondary">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="text-muted small mb-0">
+                        &copy; 2024 PortfolioForge. All rights reserved. Made with <i class="bi bi-heart-fill text-danger"></i> for creators.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar-custom');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+                navbar.style.boxShadow = 'none';
+            }
+        });
+
+        
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

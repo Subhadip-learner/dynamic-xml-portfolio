@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Help Center - PortfolioForge</title>
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet" />
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <style>
+        :root {
+            --primary-color: #6f42c1;
+            --secondary-color: #495057;
+            --accent-color: #20c997;
+            --gradient-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --success-color: #28a745;
+            --info-color: #17a2b8;
+            --warning-color: #ffc107;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--gradient-bg);
+            min-height: 100vh;
+            padding: 2rem 0;
+        }
+
+        .help-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-top: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 4rem 2rem 3rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="8" height="8" patternUnits="userSpaceOnUse"><path d="M 8 0 L 0 0 0 8" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-section h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .hero-section p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .search-box {
+            position: relative;
+            max-width: 500px;
+            margin: 2rem auto 0;
+            z-index: 2;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .search-input {
+            border: none;
+            border-radius: 50px;
+            padding: 1rem 3rem 1rem 1.5rem;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary-color);
+            border: none;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .search-btn:hover {
+            background: var(--accent-color);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .content-section {
+            padding: 3rem 2rem;
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            border-radius: 2px;
+        }
+
+        .quick-help-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .quick-help-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .quick-help-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .quick-help-card .icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .quick-help-card h5 {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .quick-help-card p {
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .quick-help-card .btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            border: none;
+            border-radius: 25px;
+            padding: 0.5rem 1.5rem;
+            color: white;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .quick-help-card .btn:hover {
+            transform: scale(1.05);
+            color: white;
+        }
+
+        .accordion {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            border: none;
+        }
+
+        .accordion-item {
+            border: none;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .accordion-item:last-child {
+            border-bottom: none;
+        }
+
+        .accordion-button {
+            background: white;
+            border: none;
+            padding: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .accordion-button:not(.collapsed) {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            box-shadow: none;
+        }
+
+        .accordion-button:focus {
+            box-shadow: none;
+            border: none;
+        }
+
+        .accordion-button::after {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%236f42c1'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+        }
+
+        .accordion-button:not(.collapsed)::after {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='white'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+        }
+
+        .accordion-body {
+            padding: 2rem 1.5rem;
+            background: #f8f9fa;
+            color: var(--secondary-color);
+            line-height: 1.6;
+        }
+
+        .contact-section {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 15px;
+            padding: 2.5rem;
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        .contact-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-method {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-method:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .contact-method .icon {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 1rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .contact-method h6 {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-method p {
+            margin: 0;
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            background: var(--success-color);
+            color: white;
+            margin-left: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+            
+            .content-section {
+                padding: 2rem 1.5rem;
+            }
+            
+            .quick-help-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-methods {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .quick-help-card {
+            animation: fadeInUp 0.6s ease-out both;
+        }
+
+        .quick-help-card:nth-child(1) { animation-delay: 0.1s; }
+        .quick-help-card:nth-child(2) { animation-delay: 0.2s; }
+        .quick-help-card:nth-child(3) { animation-delay: 0.3s; }
+        .quick-help-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .accordion {
+            animation: fadeInUp 0.6s ease-out 0.5s both;
+        }
+
+        .contact-section {
+            animation: fadeInUp 0.6s ease-out 0.6s both;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 col-xl-9">
+                <div class="help-container">
+                    
+                    <div class="hero-section">
+                        <h1><i class="fas fa-question-circle me-3"></i>Help Center</h1>
+                        <p>Find answers to your questions and get the support you need</p>
+                        
+                        <div class="search-box">
+                            <input type="text" class="form-control search-input" placeholder="Search for help topics...">
+                            <button class="search-btn" type="button">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="content-section">
+                        
+                        <h2 class="section-title">Quick Help</h2>
+                        <div class="quick-help-cards">
+                            <div class="quick-help-card">
+                                <div class="icon">
+                                    <i class="fas fa-rocket"></i>
+                                </div>
+                                <h5>Getting Started</h5>
+                                <p>Learn the basics of creating your first portfolio with our step-by-step guide.</p>
+                                <button class="btn">Get Started</button>
+                            </div>
+                            
+                            <div class="quick-help-card">
+                                <div class="icon">
+                                    <i class="fas fa-paint-brush"></i>
+                                </div>
+                                <h5>Templates & Design</h5>
+                                <p>Explore our collection of professional templates and customization options.</p>
+                                <button class="btn">Browse Templates</button>
+                            </div>
+                            
+                            <div class="quick-help-card">
+                                <div class="icon">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                </div>
+                                <h5>Publishing & Hosting</h5>
+                                <p>Learn how to publish your portfolio and make it available online.</p>
+                                <button class="btn">Learn More</button>
+                            </div>
+                            
+                            <div class="quick-help-card">
+                                <div class="icon">
+                                    <i class="fas fa-cog"></i>
+                                </div>
+                                <h5>Account Settings</h5>
+                                <p>Manage your account preferences, billing, and security settings.</p>
+                                <button class="btn">Manage Account</button>
+                            </div>
+                        </div>
+                        
+                        
+                        <h2 class="section-title">Frequently Asked Questions</h2>
+                        <div class="accordion" id="faqAccordion">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingOne">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                        <i class="fas fa-plus-circle me-2"></i>
+                                        How do I create a portfolio?
+                                    </button>
+                                </h2>
+                                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        <strong>Creating your portfolio is easy!</strong> Start by signing up for a free account, then choose from our collection of professional templates. Simply fill in your personal information, upload your work samples, and customize the design to match your style. Our intuitive editor makes it simple to add sections for your experience, skills, projects, and contact information. Once you're satisfied with your portfolio, you can publish it with just one click.
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        <i class="fas fa-server me-2"></i>
+                                        Can I host my portfolio elsewhere?
+                                    </button>
+                                </h2>
+                                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        <strong>Absolutely!</strong> PortfolioForge gives you complete ownership of your portfolio. You can download your portfolio files (HTML, CSS, JavaScript, and assets) at any time and host them on your preferred hosting provider such as Netlify, Vercel, GitHub Pages, or your own web server. We also provide direct integration with popular hosting platforms for one-click deployment.
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingThree">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                        <i class="fas fa-shield-alt me-2"></i>
+                                        Is my data secure?
+                                    </button>
+                                </h2>
+                                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        <strong>Security is our top priority.</strong> We implement industry-standard security measures including SSL encryption, secure data centers, regular security audits, and GDPR compliance. Your personal information is never shared with third parties, and you have complete control over your data. We also provide two-factor authentication and regular automated backups to ensure your portfolio is always safe and accessible.
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingFour">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                        <i class="fas fa-paint-roller me-2"></i>
+                                        Can I customize the templates?
+                                    </button>
+                                </h2>
+                                <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        <strong>Yes, full customization is available!</strong> Our templates are fully customizable - you can change colors, fonts, layouts, add or remove sections, upload custom images, and even add your own CSS for advanced styling. We provide both a visual editor for easy changes and a code editor for developers who want complete control over their portfolio's appearance and functionality.
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingFive">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                        <i class="fas fa-mobile-alt me-2"></i>
+                                        Are portfolios mobile-friendly?
+                                    </button>
+                                </h2>
+                                <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        <strong>All our portfolios are fully responsive!</strong> Every template is designed to look great on desktops, tablets, and smartphones. We use modern responsive design techniques to ensure your portfolio automatically adapts to any screen size. You can preview how your portfolio looks on different devices using our built-in device simulator before publishing.
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingSix">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                                        <i class="fas fa-dollar-sign me-2"></i>
+                                        What are the pricing options?
+                                    </button>
+                                </h2>
+                                <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        <strong>We offer flexible pricing for everyone!</strong> Start with our free plan that includes basic templates and PortfolioForge subdomain hosting. Our Pro plan ($9/month) includes premium templates, custom domain support, advanced analytics, and priority support. Enterprise plans are available for teams and organizations with additional collaboration features and bulk licensing options.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                        <div class="contact-section">
+                            <h3 class="mb-4">
+                                <i class="fas fa-headset me-2"></i>
+                                Need More Help?
+                                <span class="status-badge">
+                                    <i class="fas fa-circle me-1"></i>Online
+                                </span>
+                            </h3>
+                            <p class="lead">Our support team is here to help you succeed. Choose your preferred way to get in touch.</p>
+                            
+                            <div class="contact-methods">
+                                <a href="mailto:support@portfolioforge.com" class="contact-method">
+                                    <div class="icon">
+                                        <i class="fas fa-envelope"></i>
+                                    </div>
+                                    <h6>Email Support</h6>
+                                    <p>support@portfolioforge.com</p>
+                                    <small class="text-success">
+                                        <i class="fas fa-clock me-1"></i>
+                                        Response within 24 hours
+                                    </small>
+                                </a>
+                                
+                                <a href="tel:+15551234567" class="contact-method">
+                                    <div class="icon">
+                                        <i class="fas fa-phone"></i>
+                                    </div>
+                                    <h6>Phone Support</h6>
+                                    <p>+1 (555) 123-4567</p>
+                                    <small class="text-info">
+                                        <i class="fas fa-clock me-1"></i>
+                                        Mon-Fri 9AM-6PM EST
+                                    </small>
+                                </a>
+                                
+                                <a href="#" class="contact-method">
+                                    <div class="icon">
+                                        <i class="fas fa-comments"></i>
+                                    </div>
+                                    <h6>Live Chat</h6>
+                                    <p>Chat with our team</p>
+                                    <small class="text-success">
+                                        <i class="fas fa-circle me-1"></i>
+                                        Available now
+                                    </small>
+                                </a>
+                                
+                                <a href="#" class="contact-method">
+                                    <div class="icon">
+                                        <i class="fab fa-discord"></i>
+                                    </div>
+                                    <h6>Community</h6>
+                                    <p>Join our Discord</p>
+                                    <small class="text-primary">
+                                        <i class="fas fa-users me-1"></i>
+                                        1,500+ members
+                                    </small>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        
+        document.querySelector('.search-input').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const accordionItems = document.querySelectorAll('.accordion-item');
+            
+            accordionItems.forEach(item => {
+                const button = item.querySelector('.accordion-button');
+                const body = item.querySelector('.accordion-body');
+                const text = (button.textContent + body.textContent).toLowerCase();
+                
+                if (text.includes(searchTerm) || searchTerm === '') {
+                    item.style.display = 'block';
+                    if (searchTerm !== '' && text.includes(searchTerm)) {
+                        item.style.border = '2px solid var(--accent-color)';
+                    } else {
+                        item.style.border = '';
+                    }
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+
+        
+        document.querySelector('.search-btn').addEventListener('click', function() {
+            const searchInput = document.querySelector('.search-input');
+            const searchTerm = searchInput.value.toLowerCase();
+            
+            if (searchTerm) {
+                
+                document.querySelector('#faqAccordion').scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+
+        
+        document.querySelectorAll('.quick-help-card .btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const cardTitle = this.closest('.quick-help-card').querySelector('h5').textContent;
+                
+                
+                showNotification('info', `Redirecting to ${cardTitle} section...`);
+                
+                
+                setTimeout(() => {
+                    console.log(`Navigate to ${cardTitle} section`);
+                }, 1000);
+            });
+        });
+
+        
+        function showNotification(type, message) {
+            const notification = document.createElement('div');
+            notification.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
+            notification.style.cssText = 'top: 20px; right: 20px; z-index: 1050; min-width: 300px;';
+            notification.innerHTML = `
+                <i class="fas fa-info-circle me-2"></i>
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.remove();
+                }
+            }, 4000);
+        }
+
+        
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        
+        document.querySelectorAll('.accordion-button').forEach(button => {
+            button.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.click();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

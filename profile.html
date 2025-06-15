@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>User Profile</title>
+  
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet" />
+  
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #fff;
+      padding-top: 4rem;
+    }
+    .container-custom {
+      margin-top: 2rem;
+      margin-bottom: 5rem;
+      padding: 40px;
+      border-radius: 15px;
+      background: linear-gradient(145deg, #b4e275, #a8d968);
+      box-shadow: 
+        0 10px 30px rgba(0,0,0,0.2),
+        inset 0 1px 0 rgba(255,255,255,0.3);
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+      color: #2c3e50;
+    }
+    .container-custom::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
+      border-radius: 15px 15px 0 0;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-weight: 700;
+      font-size: 2.2rem;
+      color: #2c3e50;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    label {
+      font-weight: 600;
+      margin-top: 1rem;
+      display: block;
+      color: #2c3e50;
+    }
+    input[type="text"], input[type="email"], textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+    button {
+      margin-top: 20px;
+      padding: 12px 20px;
+      width: 100%;
+      font-weight: 700;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #9b59b6, #8e44ad);
+      color: white;
+      box-shadow: 0 4px 15px rgba(155, 89, 182, 0.3);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    button:hover {
+      background: linear-gradient(135deg, #8e44ad, #7d3c98);
+      box-shadow: 0 8px 25px rgba(155, 89, 182, 0.4);
+    }
+    .top-left-header {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 1000;
+    }
+    .top-left-header img.logo {
+      height: 40px;
+      width: auto;
+    }
+    .top-left-header .header-text {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: #2c3e50;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="top-left-header">
+    <img src="../data/images/logo.png" alt="Logo" class="logo" />
+    <div class="header-text">PortfolioForge</div>
+  </div>
+  <div class="container-custom" id="profile-container" style="margin-top: 70px;">
+    <h1>User Profile</h1>
+    <div id="user-info">
+      <h2>Contact</h2>
+      <p><strong>Email:</strong> <span id="user-email"></span></p>
+      <p><strong>Phone:</strong> <input type="text" id="user-phone" /></p>
+      <p><strong>Whatsapp:</strong> <input type="text" id="user-whatsapp" /></p>
+      <p><strong>Address:</strong> <input type="text" id="user-address" /></p>
+    </div>
+
+    <div id="skills-section">
+      <h2>Skills</h2>
+      <ul id="skills-list"></ul>
+      <input type="text" id="new-skill-name" placeholder="Skill Name" />
+      <input type="text" id="new-skill-level" placeholder="Proficiency Level" />
+      <button id="add-skill-btn" type="button">Add Skill</button>
+    </div>
+
+    <div id="portfolio-section">
+      <h2>Portfolio Projects</h2>
+      <ul id="projects-list"></ul>
+      <div id="new-projects-container">
+        <div class="project-entry">
+          <input type="text" class="projectname" placeholder="Project Title" />
+          <input type="text" class="project_description" placeholder="Project Description" />
+          <div class="technologyused-container">
+            <label>Technologies Used:</label>
+            <div class="technology-list">
+              <input type="text" class="technology" placeholder="Technology" />
+            </div>
+            <button class="add-technology-btn" type="button">Add Technology</button>
+          </div>
+          <div class="projectimages-container">
+            <label>Project Images:</label>
+            <div class="image-list">
+              <input type="file" class="projectimage" accept="image/*" />
+            </div>
+            <button class="add-image-btn" type="button">Add Image</button>
+          </div>
+          <input type="file" class="projectzip" accept=".zip" />
+          <button class="remove-project-btn" type="button">Remove Project</button>
+        </div>
+      </div>
+      <button id="add-project-btn" type="button">Add Project</button>
+    </div>
+
+    <div id="education-section">
+      <h2>Education</h2>
+      <ul id="education-list"></ul>
+      <div id="new-education-container">
+        <div class="education-entry">
+          <input type="text" class="new-education-institute" placeholder="Institute" />
+          <input type="text" class="new-education-course" placeholder="Course" />
+          <button class="remove-education-btn" type="button">Remove Education</button>
+        </div>
+      </div>
+      <button id="add-education-btn" type="button">Add Education</button>
+    </div>
+
+    <div id="workexperience-section">
+      <h2>Work Experiences</h2>
+      <ul id="workexperience-list"></ul>
+      <div id="new-workexperience-container">
+        <div class="workexperience-entry">
+          <input type="text" class="new-workexperience-company" placeholder="Company Name" />
+          <input type="text" class="new-workexperience-role" placeholder="Role" />
+          <input type="text" class="new-workexperience-startyear" placeholder="Start Year" />
+          <input type="text" class="new-workexperience-endyear" placeholder="End Year" />
+          <button class="remove-workexperience-btn" type="button">Remove Work Experience</button>
+        </div>
+      </div>
+      <button id="add-workexperience-btn" type="button">Add Work Experience</button>
+    </div>
+
+    <div id="testimonials-section">
+      <h2>Testimonials</h2>
+      <ul id="testimonials-list"></ul>
+      <div id="new-testimonial-container">
+        <div class="testimonial-entry">
+          <input type="text" class="new-testimonial-madeby" placeholder="Made By" />
+          <input type="text" class="new-testimonial-statement" placeholder="Statement" />
+          <button class="remove-testimonial-btn" type="button">Remove Testimonial</button>
+        </div>
+      </div>
+      <button id="add-testimonial-btn" type="button">Add Testimonial</button>
+    </div>
+
+    <div id="certifications-section">
+      <h2>Certifications</h2>
+      <ul id="certifications-list"></ul>
+      <div id="new-certification-container">
+        <div class="certification-entry">
+          <input type="text" class="new-certification" placeholder="Certification" />
+          <button class="remove-certification-btn" type="button">Remove Certification</button>
+        </div>
+      </div>
+      <button id="add-certification-btn" type="button">Add Certification</button>
+    </div>
+
+    <div id="accomplishments-section">
+      <h2>Accomplishments</h2>
+      <ul id="accomplishments-list"></ul>
+      <div id="new-accomplishment-container">
+        <div class="accomplishment-entry">
+          <input type="text" class="new-accomplishment" placeholder="Accomplishment" />
+          <button class="remove-accomplishment-btn" type="button">Remove Accomplishment</button>
+        </div>
+      </div>
+      <button id="add-accomplishment-btn" type="button">Add Accomplishment</button>
+    </div>
+
+    <div id="aboutme-section">
+      <h2>About Me</h2>
+      <textarea id="aboutme-textarea" rows="5" cols="50" placeholder="Write about yourself..."></textarea>
+    </div>
+
+    <div id="sociallinks-section">
+      <h2>Social Links</h2>
+      <p><label>Github: <input type="text" id="social-github" /></label></p>
+      <p><label>LinkedIn: <input type="text" id="social-linkdn" /></label></p>
+    </div>
+
+    <div id="photo-section">
+      <h2>Profile Photo</h2>
+      <img id="profile-photo-img" src="" alt="Profile Photo" style="max-width: 150px; max-height: 150px; display: block; margin-bottom: 10px;" />
+      <input type="file" id="photo-input" name="photo" accept="image/*" />
+    </div>
+
+    <button id="save-profile-btn" type="button">Save Profile</button>
+    <p id="save-msg"></p>
+  </div>
+  <div><h5>** Any images and projectzip reuploaded previous uploaded images and project zip will be removed</h5></div>
+  <script src="profile.js"></script>
+</body>
+</html>

@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Templates - PortfolioForge</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary-color: #8b5cf6;
+            --accent-color: #06b6d4;
+            --dark-bg: #0f172a;
+            --light-bg: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--light-bg);
+        }
+
+        /* Custom Navbar */
+        .navbar-custom {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-color) !important;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .navbar-nav .nav-link {
+            font-weight: 500;
+            color: var(--text-dark) !important;
+            margin: 0 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 6rem 0 4rem;
+            margin-top: 76px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .page-header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Filter Section */
+        .filter-section {
+            background: white;
+            padding: 2rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            margin-bottom: 3rem;
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 500;
+            margin: 0.25rem;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Template Cards */
+        .template-section {
+            padding: 3rem 0;
+        }
+
+        .template-card {
+            background: white;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            height: 100%;
+            position: relative;
+        }
+
+        .template-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .template-preview {
+            position: relative;
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .template-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .template-card:hover .template-preview img {
+            transform: scale(1.05);
+        }
+
+        .template-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .template-card:hover .template-overlay {
+            opacity: 1;
+        }
+
+        .template-info {
+            padding: 1.5rem;
+        }
+
+        .template-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .template-category {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .template-features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 1rem 0;
+        }
+
+        .template-features li {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .template-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-custom {
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary-custom {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary-custom:hover {
+            background: var(--primary-dark);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline-custom {
+            background: transparent;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+        }
+
+        .btn-outline-custom:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* Popular Badge */
+        .popular-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: linear-gradient(135deg, #ff6b6b, #ff8e53);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        /* Footer */
+        .footer-custom {
+            background: var(--dark-bg);
+            color: white;
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            margin: 0 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        /* Animation Classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-delay-1 { animation-delay: 0.1s; }
+        .animate-delay-2 { animation-delay: 0.2s; }
+        .animate-delay-3 { animation-delay: 0.3s; }
+        .animate-delay-4 { animation-delay: 0.4s; }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .page-header {
+                padding: 4rem 0 2rem;
+            }
+            
+            .template-preview {
+                height: 200px;
+            }
+            
+            .filter-section {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-file-earmark-code"></i>
+                PortfolioForge
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#features">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="page-a.html">Portfolio Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="page-b.html">Templates</a>
+                    </li>
+                </ul>
+                
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../login/login.html">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-custom btn-primary-custom ms-2" href="../signup/signup.html">
+                            Sign Up <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="page-header-content text-center">
+                <h1 class="display-4 fw-bold mb-3">Choose Your Perfect Template</h1>
+                <p class="lead mb-0">
+                    Professionally designed templates to showcase your skills and experience. 
+                    Pick one and make it uniquely yours in minutes.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="filter-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="d-flex flex-wrap justify-content-center align-items-center gap-2">
+                        <span class="me-3 fw-semibold">Filter by category:</span>
+                        <button class="filter-btn active" data-filter="all">All Templates</button>
+                        <button class="filter-btn" data-filter="creative">Creative</button>
+                        <button class="filter-btn" data-filter="business">Business</button>
+                        <button class="filter-btn" data-filter="developer">Developer</button>
+                        <button class="filter-btn" data-filter="designer">Designer</button>
+                        <button class="filter-btn" data-filter="minimal">Minimal</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Templates Section -->
+    <section class="template-section">
+        <div class="container">
+            <div class="row" id="templatesContainer">
+                <!-- Template 1 - Creative -->
+                <div class="col-lg-4 col-md-6 mb-4 template-item fade-in" data-category="creative">
+                    <div class="template-card">
+                        <div class="popular-badge">Popular</div>
+                        <div class="template-preview">
+                            <img src="https://picsum.photos/400/300?random=1" alt="Creative Portfolio Template">
+                            <div class="template-overlay">
+                                <a href="#" class="btn btn-custom btn-primary-custom">
+                                    <i class="bi bi-eye"></i> Preview
+                                </a>
+                            </div>
+                        </div>
+                        <div class="template-info">
+                            <span class="template-category">Creative</span>
+                            <h3 class="template-title">Artistic Vision</h3>
+                            <ul class="template-features">
+                                <li><i class="bi bi-check-circle-fill text-success"></i> Image gallery showcase</li>
+                                <li><i class="bi bi-check-circle-fill text-success"></i> Video background support</li>
+                                <li><i class="bi bi-check-circle-fill text-success"></i> Custom animations</li>
+                                <li><i class="bi bi-check-circle-fill text-success"></i> Mobile responsive</li>
+                            </ul>
+                            <div class="template-actions">
+                                <a href="#" class="btn btn-custom btn-primary-custom">
+                                    <i class="bi bi-download"></i> Use Template
+                                </a>
+                                <a href="#" class="btn btn-custom btn-outline-custom">
+                                    <i class="bi bi-eye"></i> Preview
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Template 2 - Business -->
+                <div class="col-lg-4 col-md-6 mb-4 template-item fade-in animate-delay-1" data-category="business">
+                    <div class="template-card">
+                        <div class="template-preview">
+                            <img src="https://picsum.photos/400/300?random=2" alt="Business Portfolio Template">
+                            <div class="template-overlay">
+                                <a href="#" class="btn btn-custom btn-primary-custom">
+                                    <i class="bi bi-eye"></i> Preview
+                                </a>
+                            </div>
+                        </div>
+                        <div class="template-info">
+                            <span class="template-category">Business</span>
+                            <h3 class="template-title">Executive Pro</h3>
+                            <ul class="template-features">
+                                <li><i class="bi bi-check-circle-fill text-success"></i> Professional layout</li>
+                                <li><i class="bi bi-check-circle-fill text-success"></i> Contact form integration</li>
+                                <li><i class="bi bi-check-circle-fill text-success"></i> Testimonials section</li>
+                                <li><i class="bi bi-check-circle-fill text-success"></i> SEO optimized</li>
+                            </ul>
+                            <div class="template-actions">
+                                <a href="#" class="btn btn-custom btn-primary-custom">
+                                    <i class="bi bi-download"></i> Use Template
+                                </a>
+                                <a href="#" class="btn btn-custom btn-outline-custom">
+                                    <i class="bi bi-eye"></i> Preview
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Template 3 - Developer -->
+                <div class="col-lg-4 col-md-6 mb-4 template-item fade-in animate-delay-2" data-category="developer">
+                    <div class="template-card">
+                        <div class="template-preview">
+                            <img src="https://picsum.photos/400/300?random=3" alt="Developer Portfolio Template">
+                            <div class="template-overlay">
+                                <a href="#" class="btn btn-custom btn-primary-custom">
+                                    <i class="bi bi-eye"></i> Preview
+                                </a>
+                            </div>
+                        </div>
+                        <div class="template-info">
+                            <span class="template-category">Developer</span>
+                            <h3 class="template-title">Code Master</h3>
+                            <ul class="template-features">
+                                <li><i class="bi bi-check-circle-fill text-success"></i> GitHub integration</li>
+                                <li><i class="bi bi-check-circle-fill text-success"></i> Project showcase</li>
+                                <li><i class="bi bi-check-circle-fill text-success"></i> Code syntax highlighting</li>
+                                <li><i class="bi bi-check-circle-fill text-success"></i> Dark/Light mode</li>
+                            </ul>
+                            <div class="template-actions">
+                                <a href="#" class="btn btn-custom btn-primary-custom">
+                                    <i class="bi bi-download"></i> Use Template
+                                </a>
+                                <a href="#" class="btn btn-custom btn-outline-custom">
+                                    <i class="bi bi-eye"></i> Preview
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Template 4 - Designer -->
+                <div class="col-lg-4 col-md-6 mb-4 template-item fade-in animate-delay-3" data-category="designer">
+                    <div class="template-card">
+                        <div class="template-preview">
+                            <img src="https://picsum.photos/400/300?random=4" alt="Designer Portfolio Template">
+                            <div class="template-overlay">
+                                <a href="#" class="btn btn-custom btn-primary-custom">
+                                    <i class="bi bi-eye"></i> Preview
+                                </a>
+                            </div>
+                        </div>
+                        <div class="template-info">
+                            <span class="template-category">Designer</span>
+                            <h3 class="template-title">Design Studio</h3>
+                            <ul class="template-features">
+                                <li><i class="bi bi-check-circle-fill text-success"></i> Portfolio grid layout</li>
+                                <li><i class="bi bi-check-circle-fill text-success"></i> Case study pages</li>
+                                <li><i class="bi bi-check-circle-fill text-success"></i> Image optimization</li>
+                                <li><i class="bi bi-check-circle-fill text-success"></i> Typography focused</li>
+                            </ul>
+                            <div class="template-actions">
+                                <a href="#" class="btn btn-custom btn-primary-custom">
+                                    <i class="bi bi-download"></i> Use Template
+                                </a>
+                                <a href="#" class="btn btn-custom btn-outline-custom">
+                                    <i class="bi bi-eye"></i> Preview
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Template 5 - Minimal -->
+                <div class="col-lg-4 col-md-6 mb-4 template-item fade-in animate-delay-4" data-category="minimal">
+                    <div class="template-card">
+                        <div class="popular-badge">New</div>
+                        <div class="template-preview">
+                            <img src="https://picsum.photos/400/300?random=5" alt="Minimal Portfolio Template">
+                            <div class="template-overlay">
+                                <a href="#" class="btn btn-custom btn-primary-custom">
+                                    <i class="bi bi-eye"></i> Preview
+                                </a>
+                            </div>
+                        </div>
+                        <div class="template-info">
+                            <span class="template-category">Minimal</span>
+                            <h3 class="template-title">Clean Slate</h3>
+                            <ul class="template-features">
+                                <li><i class="bi bi-check-circle-fill text-success"></i> Minimalist design</li>
+                                <li><i class="bi bi-check-circle-fill text-success"></i> Fast loading</li>
+                                <li><i class="bi bi-check-circle-fill text-success"></i> Typography focused</li>
+                                <li><i class="bi bi-check-circle-fill text-success"></i> Easy to customize</li>
+                            </ul>
+                            <div class="template-actions">
+                                <a href="#" class="btn btn-custom btn-primary-custom">
+                                    <i class="bi bi-download"></i> Use Template
+                                </a>
+                                <a href="#" class="btn btn-custom btn-outline-custom">
+                                    <i class="bi bi-eye"></i> Preview
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Template 6 - Creative -->
+                <div class="col-lg-4 col-md-6 mb-4 template-item fade-in" data-category="creative">
+                    <div class="template-card">
+                        <div class="template-preview">
+                            <img src="https://picsum.photos/400/300?random=6" alt="Creative Portfolio Template">
+                            <div class="template-overlay">
+                                <a href="#" class="btn btn-custom btn-primary-custom">
+                                    <i class="bi bi-eye"></i> Preview
+                                </a>
+                            </div>
+                        </div>
+                        <div class="template-info">
+                            <span class="template-category">Creative</span>
+                            <h3 class="template-title">Bold Expression</h3>
+                            <ul class="template-features">
+                                <li><i class="bi bi-check-circle-fill text-success"></i> Vibrant color schemes</li>
+                                <li><i class="bi bi-check-circle-fill text-success"></i> Interactive elements</li>
+                                <li><i class="bi bi-check-circle-fill text-success"></i> Custom illustrations</li>
+                                <li><i class="bi bi-check-circle-fill text-success"></i> Animation library</li>
+                            </ul>
+                            <div class="template-actions">
+                                <a href="#" class="btn btn-custom btn-primary-custom">
+                                    <i class="bi bi-download"></i> Use Template
+                                </a>
+                                <a href="#" class="btn btn-custom btn-outline-custom">
+                                    <i class="bi bi-eye"></i> Preview
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Load More Button -->
+            <div class="text-center mt-5">
+                <button class="btn btn-custom btn-outline-custom btn-lg" id="loadMoreBtn">
+                    <i class="bi bi-plus-circle"></i> Load More Templates
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-custom">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="bi bi-file-earmark-code me-2 fs-4" style="color: var(--primary-color);"></i>
+                        <span class="fs-5 fw-bold">PortfolioForge</span>
+                    </div>
+                    <p class="text-muted">
+                        Creating professional portfolios that make you stand out from the crowd.
+                    </p>
+                </div>
+                <div class="col-lg-6 text-lg-end">
+                    <div class="footer-links mb-3">
+                        <a href="/terms">Terms of Service</a>
+                        <a href="/privacy">Privacy Policy</a>
+                        <a href="/contact">Contact</a>
+                        <a href="/help">Help</a>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" class="text-muted me-3"><i class="bi bi-twitter fs-5"></i></a>
+                        <a href="#" class="text-muted me-3"><i class="bi bi-linkedin fs-5"></i></a>
+                        <a href="#" class="text-muted me-3"><i class="bi bi-github fs-5"></i></a>
+                        <a href="#" class="text-muted"><i class="bi bi-instagram fs-5"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4 border-secondary">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="text-muted small mb-0">
+                        &copy; 2024 PortfolioForge. All rights reserved. Made with <i class="bi bi-heart-fill text-danger"></i> for creators.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Filter functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const templateItems = document.querySelectorAll('.template-item');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    // Add active class to clicked button
+                    this.classList.add('active');
+
+                    const filterValue = this.getAttribute('data-filter');
+
+                    templateItems.forEach(item => {
+                        if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                            item.style.display = 'block';
+                            item.classList.add('fade-in');
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // Load more functionality (demo)
+            const loadMoreBtn = document.getElementById('loadMoreBtn');
+            loadMoreBtn.addEventListener('click', function() {
+                // This would typically load more templates via AJAX
+                this.innerHTML = '<i class="bi bi-check-circle"></i> All Templates Loaded';
+                this.disabled = true;
+                this.classList.add('btn-success');
+                this.classList.remove('btn-outline-custom');
+            });
+
+            // Intersection Observer for animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Template preview functionality
+            document.querySelectorAll('.template-overlay .btn, .template-actions .btn-outline-custom').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    // This would open a modal or new window with template preview
+                    alert('Template preview would open here!');
+                });
+            });
+
+            // Use template functionality
+            document.querySelectorAll('.template-actions .btn-primary-custom').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    // This would redirect to the template customization page
+                    alert('Redirect to template customization page!');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
